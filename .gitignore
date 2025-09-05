@@ -1,0 +1,32 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+*.tmp
+
+# Laravel Backend
+/backend/vendor/
+/backend/.env
+/backend/storage/logs/*
+/backend/storage/framework/cache/*
+/backend/storage/framework/sessions/*
+/backend/storage/framework/views/*
+/backend/bootstrap/cache/*
+/backend/public/storage
+
+# React Frontend
+/frontend/node_modules/
+/frontend/.env
+/frontend/dist/
+/frontend/build/
+/frontend/.cache
+
+# Docker
+.dockerignore
+*.env
+volumes/
+
+# Misc
+.idea/
+.vscode/
