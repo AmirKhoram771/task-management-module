@@ -1,11 +1,9 @@
-version: '3.8'
-
 services:
   backend:
     build: ./backend
     container_name: task-backend
     ports:
-      - "8000:9000"  # PHP-FPM
+      - "8000:9000"  # PHP-FPM (ما بعداً nginx یا artisan serve اضافه می‌کنیم اگر نیاز)
     volumes:
       - ./backend:/var/www/html
     environment:
@@ -21,6 +19,7 @@ services:
       - redis
     networks:
       - backend-net
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
@@ -31,6 +30,7 @@ services:
       - ./frontend:/app
     networks:
       - frontend-net
+    restart: unless-stopped
 
   db:
     image: postgres:15-alpine
@@ -43,12 +43,14 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - backend-net
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
     container_name: task-redis
     networks:
       - backend-net
+    restart: unless-stopped
 
 volumes:
   db-data:

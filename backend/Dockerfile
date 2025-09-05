@@ -1,8 +1,9 @@
 # Stage 1: Build dependencies
 FROM php:8.2-fpm-alpine AS builder
 
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     libzip-dev \
+    libpq-dev \
     zip \
     unzip \
     git \
@@ -15,7 +16,7 @@ RUN composer install --no-dev --optimize-autoloader
 # Stage 2: Runtime
 FROM php:8.2-fpm-alpine
 
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql
 
